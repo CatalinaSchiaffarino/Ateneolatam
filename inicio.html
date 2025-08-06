@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ateneo Latinoamericano | Inicio</title>
+  <link rel="stylesheet" href="styles.css"> <!-- reutilizando el mismo CSS principal -->
+  <style>
+    #contenedor-eventos {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .evento {
+      background-color: white;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .evento h2 {
+      margin-top: 0;
+      color: #1a5d66;
+    }
+
+    .evento p {
+      line-height: 1.6;
+      color: #355156;
+    }
+
+    .imagenes-evento {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .imagenes-evento img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 1rem;
+      color: #12333c;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -3px;
+      left: 0;
+      background-color: #1a5d66;
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo-container">
+      <img src="img/logo.png" alt="Logo Ateneo" class="logo" />
+      <h1 class="titulo">Ateneo Latinoamericano</h1>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Volver al sitio</a>
+      <a href="#" onclick="mostrarEvento('panama'); return false;">Panamá</a>
+      <!-- Más enlaces a eventos si los agregás -->
+    </nav>
+  </header>
+
+  <main id="contenedor-eventos">
+    <!-- Contenido dinámico -->
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 Ateneo Latinoamericano</p>
+    </div>
+  </footer>
+
+  <script>
+    const eventos = {
+      panama: {
+        titulo: "Sesión dedicada a Panamá",
+        descripcion: `Dedicada íntegramente a Panamá, realizamos nuestra primera sesión ordinaria del año 2025, año que dedicamos a América Central y el Caribe, con la presencia de la Embajadora de Panamá, María Gabriela Méndez y la Consejera de la Embajada, Mirlo Guerra.
+        <br><br>
+        La introducción cultural estuvo a cargo de Manuel Calvo y trató sobre el tamborito panameño, mientras que la introducción biográfica, dedicada al General Omar Torrijos Herrera, fue presentada por Juan Manuel Sambucetti y el trabajo principal, «Panamá de los Tratados Torrijos-Carter a la devolución del Canal», por Gonzalo Downey.
+        <br><br>
+        Inauguramos nuestro tercer año de trabajo en el Hotel Own de Montevideo, que nos brindó una fraternal acogida y dio mayor realce a la 1° sesión de este 2025, acompañados de más de 25 personas.
+        <br><br>
+        Los esperamos a todos en nuestra próxima sesión durante el mes de abril, que estará dedicada a Puerto Rico 🇵🇷`,
+        imagenes: ["Panamá/1.png", "Panamá/2.png", "Panamá/3.png", "Panamá/4.png"]
+      }
+    };
+
+    function mostrarEvento(clave) {
+      const evento = eventos[clave];
+      const contenedor = document.getElementById("contenedor-eventos");
+      contenedor.innerHTML = `
+        <div class="evento">
+          <h2>${evento.titulo}</h2>
+          <p>${evento.descripcion}</p>
+          <div class="imagenes-evento">
+            ${evento.imagenes.map(src => `<img src="${src}" alt="Imagen del evento">`).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // Mostrar Panamá por defecto al cargar
+    window.onload = () => mostrarEvento('panama');
+  </script>
+</body>
+</html>
